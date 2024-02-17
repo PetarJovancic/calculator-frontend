@@ -1,4 +1,4 @@
-## Frontend
+## Calculator
 
 <img src="https://img.icons8.com/ultraviolet/80/000000/react--v1.png"
      height="50px"
