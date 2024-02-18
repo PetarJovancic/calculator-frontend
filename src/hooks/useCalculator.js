@@ -37,8 +37,11 @@ export const useCalculator = () => {
       console.log("Insufficient data for calculation");
       return;
     }
+    const operands = [...calc.operands, calc.currentInput];
+    const finalOperands = operands.filter(
+      (operand) => !isNaN(parseFloat(operand)) && isFinite(operand)
+    );
 
-    const finalOperands = [...calc.operands, calc.currentInput];
     const result = await performCalculation(finalOperands, calc.operation);
     setCalc({
       operation: "",
@@ -49,13 +52,15 @@ export const useCalculator = () => {
   }, [calc]);
 
   const percentageClickHandler = useCallback(async () => {
-    const result = await performCalculation([calc.currentInput], "%");
-    setCalc({
-      operation: "",
-      operands: [],
-      currentInput: result.toString(),
-      display: result.toString(),
-    });
+    if (!isNaN(parseFloat(calc.currentInput))) {
+      const result = await performCalculation([calc.currentInput], "%");
+      setCalc({
+        operation: "",
+        operands: [],
+        currentInput: result.toString(),
+        display: result.toString(),
+      });
+    }
   }, [calc]);
 
   const resetClickHandler = useCallback(() => {

@@ -6,10 +6,9 @@ const performCalculation = async (operands, operation) => {
     const backendUrl =
       process.env.REACT_APP_BACKEND_URL || "http://0.0.0.0:8000";
     const payload = {
-      operation: mappedOperation,
+      operation: [mappedOperation],
       operands: operands.map(Number),
     };
-
     const response = await fetch(`${backendUrl}/calculate`, {
       method: "POST",
       headers: {
