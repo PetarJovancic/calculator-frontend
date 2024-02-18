@@ -11,7 +11,8 @@
 
 ### Introduction
 
-This is a frontend app for basic calculator
+This is a frontend app for basic calculator.
+It is hosted on netlify: [peterssimplecalculator](https://peterssimplecalculator.netlify.app/)
 
 ## Usage
 
