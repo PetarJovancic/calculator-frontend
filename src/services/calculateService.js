@@ -1,24 +1,25 @@
 import operationMap from "../constants/operationMap";
 
 const performCalculation = async (operands, operation) => {
-  const operationQueryParam = operationMap[operation] || "unknown";
+  const mappedOperation = operationMap[operation] || "unknown";
   try {
     const backendUrl =
       process.env.REACT_APP_BACKEND_URL || "http://0.0.0.0:8000";
+    const payload = {
+      operation: mappedOperation,
+      operands: operands.map(Number),
+    };
 
-    const response = await fetch(
-      `${backendUrl}/calculate?operation=${operationQueryParam}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(operands.map(Number)),
-      }
-    );
+    const response = await fetch(`${backendUrl}/calculate`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
 
     if (!response.ok) {
-      throw new Error("Network response was not OK");
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
