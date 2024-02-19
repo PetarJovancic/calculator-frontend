@@ -17,9 +17,6 @@ export const useCalculator = () => {
         prev.currentInput === "0" && value !== "."
           ? value
           : prev.currentInput + value;
-      if (currentInput.length > 30) {
-        return prev;
-      }
       return { ...prev, currentInput, display: currentInput };
     });
   }, []);
